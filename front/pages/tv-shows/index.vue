@@ -1,15 +1,20 @@
 <template>
   <div class="container">
-qzdqzd
+    <div v-for="show in shows">
+      {{show.title}}
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-  import Vue from 'vue'
+<script>
+  // import Vue from 'vue'
 
-  export default Vue.extend({
-
-  })
+  export default {
+    async asyncData({params, $http}) {
+      const shows = await $http.$get('http://localhost:5000/rest/shows');
+      return {shows};
+    }
+  }
 </script>
 
 <style>
