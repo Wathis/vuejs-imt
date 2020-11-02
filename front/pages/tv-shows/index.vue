@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-for="show in shows">
+    <div v-for="show in shows" :key="show.id">
       {{show.title}}
     </div>
   </div>
