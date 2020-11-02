@@ -26,11 +26,6 @@
 
 <script>
 import Vue from "vue";
-import { MbTable, MdContent, MdTabs } from "vue-material/dist/components";
-import "vue-material/dist/vue-material.min.css";
-import "vue-material/dist/theme/default.css";
-Vue.use(MdContent);
-Vue.use(MdTabs);
 export default {
   async asyncData({ params, $http }) {
     const show = await $http.$get(
