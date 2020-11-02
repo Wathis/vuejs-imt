@@ -6,7 +6,16 @@
           <h4>{{show.title}}</h4>
           <a class="betaserie" :href="show.resource_url">Lien betaserie</a>
         </div>
-        <NuxtLink class="more" :to="'/tv-shows/' + show.id">Détails</NuxtLink>
+        <div class="other">
+
+          <div v-if="!show.user.favorited" @click="onClickAddFavourite" class="favourite">
+            Ajouter en favoris
+          </div>
+          <div v-if="show.user.favorited" @click="onClickAddFavourite" class="favourite">
+            Enlever des favoris
+          </div>
+          <NuxtLink class="more" :to="'/tv-shows/' + show.id">Détails</NuxtLink>
+        </div>
       </div>
     </div>
 </template>
@@ -16,7 +25,27 @@
         name: "ShowTile",
         props: {
           show: Object
+        },
+      data: function(){
+        return {
+          show: undefined,
+          favorited: false,
         }
+      },
+      watch: {
+        show: function(showNew) {
+          this.showData = showNew;
+          this.favorited = this.showData.user.favorited;
+        }
+      },
+      methods: {
+          async onClickAddFavourite(){
+            let res = await this.$http.post('http://localhost:5000/rest/shows/'+ this.showData.id +'/favorites', {isFavorite: !this.favorited});
+            if (res.status === 200) {
+              this.favorited = !this.favorited;
+            }
+          }
+      }
     }
 </script>
 
@@ -43,12 +72,21 @@
     text-decoration: none;
     color: grey;
   }
-  .more {
+  .other {
     text-decoration: none;
-    font-size: 10px;
+    display: flex;
     position: absolute;
     color: white;
     right: 20px;
+  }
+  .favourite {
+    padding: 5px;
+    color: grey;
+    cursor: pointer;
+  }
+  .more {
+    text-decoration: none;
+    color: white;
     border-radius: 10px;
     background-color: grey;
     padding: 5px;

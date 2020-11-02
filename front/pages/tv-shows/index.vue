@@ -1,7 +1,6 @@
 <template>
   <div>
     <h2 class="myTitle">TV-SHOWS</h2>
-    <Button to="/tv-shows/add" title="Ajouter"/>
     <TvFilmList :shows="shows"></TvFilmList>
   </div>
 </template>
