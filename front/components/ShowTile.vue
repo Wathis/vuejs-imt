@@ -7,7 +7,6 @@
           <a class="betaserie" :href="show.resource_url">Lien betaserie</a>
         </div>
         <div class="other">
-
           <div v-if="!show.user.favorited" @click="onClickAddFavourite" class="favourite">
             Ajouter en favoris
           </div>
@@ -28,7 +27,7 @@
         },
       data: function(){
         return {
-          show: undefined,
+          showData: undefined,
           favorited: false,
         }
       },
